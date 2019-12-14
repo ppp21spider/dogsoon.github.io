@@ -4,6 +4,27 @@
   
     
     <entry>
+      <title>Java 锁系列之一：内容总览</title>
+      <link href="/2018/08/07/Java-lock-1/"/>
+      <url>/2018/08/07/Java-lock-1/</url>
+      
+        <content type="html"><![CDATA[<h1><span id="一级标题">一级标题</span></h1>]]></content>
+      
+      
+      <categories>
+          
+          <category> Java </category>
+          
+          <category> Lock </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Kafka系列</title>
       <link href="/2018/08/07/Kafka-1/"/>
       <url>/2018/08/07/Kafka-1/</url>
@@ -52,6 +73,27 @@
       <categories>
           
           <category> Kafka </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>JVM | JDK1.8中永久代被删除</title>
+      <link href="/2015/01/01/Jvm-PerGen/"/>
+      <url>/2015/01/01/Jvm-PerGen/</url>
+      
+        <content type="html"><![CDATA[<h1><span id="fang-fa-qu-yu-yong-jiu-dai-de-guan-xi">方法区与永久代的关系</span><a href="#fang-fa-qu-yu-yong-jiu-dai-de-guan-xi" class="header-anchor">#</a></h1><ul><li><p>方法区是JVM规范中的定义;</p></li><li><p>永久代是HotSpot对方法区的实现。</p></li></ul><h1><span id="fang-fa-qu-bei-ti-huan-wei-yuan-kong-jian">方法区被替换为元空间</span><a href="#fang-fa-qu-bei-ti-huan-wei-yuan-kong-jian" class="header-anchor">#</a></h1><ul><li><p>从JDK 8开始，永久代被移除。</p></li><li><p>原先存放在永久代中的类的元信息转移到了本地内存,并把这块区域称为元空间。</p></li><li><p>同时，原先存放在永久代的interned Strings 和 class static variables 转移到了Java堆。</p></li></ul><blockquote><p>The proposed implementation will allocate class meta-data in native memory and move interned Strings and class statics to the Java heap. Hotspot will explicitly allocate and free the native memory for the class meta-data.<br>-QW:<a href="https://openjdk.java.net/jeps/122" target="_blank" rel="noopener">https://openjdk.java.net/jeps/122</a> </p></blockquote><h1><span id="guan-yu-yuan-kong-jian">关于元空间</span><a href="#guan-yu-yuan-kong-jian" class="header-anchor">#</a></h1><ul><li>JVM会在运行时动态调整元空间的大小。G1和CMS都会很好地收集Metaspace区，一般会伴随着Full GC。</li><li>可以使用 -XX:MaxMetaspaceSize 参数来指定 Metaspace 区域的最大空间。</li><li>MaxMetaspaceSize如果设置过小，元数据超过了设置的最大空间，会发生GC；如果设置过大，会浪费系统内存。</li><li>元空间耗尽，会引发“java.lang.OutOfMemoryError: Metadata space”错误。</li><li>因此，对Metaspace进行适当的监控和调优是非常有必要的。</li></ul><h1><span id="yong-jiu-dai-ti-huan-wei-yuan-kong-jian-de-hao-chu">永久代替换为元空间的好处</span><a href="#yong-jiu-dai-ti-huan-wei-yuan-kong-jian-de-hao-chu" class="header-anchor">#</a></h1><ul><li><p>把元信息和interned Strings、class static variables分开管理。不会再发生永久代内存泄漏java.lang.OutOfMemoryError: PermGen。</p></li><li><p>其中interned Strings、class static variables由堆来统一管理。</p></li><li><p>元信息放在本地内存，由元空间管理。</p><hr><p>名词：<br>方法区–Permanent Generation<br>元空间–Metaspace<br>元信息–Class metadata<br>本地内存–Native memory<br>interned Strings–字符串常量<br>参考：<br><a href="https://openjdk.java.net/jeps/122" target="_blank" rel="noopener">https://openjdk.java.net/jeps/122</a><br><a href="https://www.sczyh30.com/posts/Java/jvm-metaspace/" target="_blank" rel="noopener">https://www.sczyh30.com/posts/Java/jvm-metaspace/</a><br><a href="https://blog.csdn.net/u012834750/article/details/70160594" target="_blank" rel="noopener">https://blog.csdn.net/u012834750/article/details/70160594</a></p></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> Java </category>
+          
+          <category> JVM </category>
           
       </categories>
       

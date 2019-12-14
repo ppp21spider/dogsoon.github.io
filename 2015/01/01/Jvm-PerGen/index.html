@@ -5,7 +5,7 @@
   
 
 
-<html class="theme-next muse use-motion" lang="zh-CN">
+<html class="theme-next pisces use-motion" lang="zh-CN">
 <head><meta name="generator" content="Hexo 3.9.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Typora,Markdown,">
+  <meta name="keywords" content="Hexo, NexT">
 
 
 
@@ -79,18 +79,17 @@
 
 
 
-<meta name="description" content="Good!">
-<meta name="keywords" content="Typora,Markdown">
+<meta name="description" content="方法区与永久代的关系# 方法区是JVM规范中的定义;  永久代是HotSpot对方法区的实现。   方法区被替换为元空间# 从JDK 8开始，永久代被移除。  原先存放在永久代中的类的元信息转移到了本地内存,并把这块区域称为元空间。  同时，原先存放在永久代的interned Strings 和 class static variables 转移到了Java堆。    The proposed i">
 <meta property="og:type" content="article">
-<meta property="og:title" content="typora-vue-theme主题介绍">
-<meta property="og:url" content="https://ppp21spider.github.io/2018/09/07/article-title/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="Good!">
+<meta property="og:title" content="JVM | JDK1.8中永久代被删除">
+<meta property="og:url" content="https://ppp21spider.github.io/2015/01/01/Jvm-PerGen/index.html">
+<meta property="og:site_name" content="流熵">
+<meta property="og:description" content="方法区与永久代的关系# 方法区是JVM规范中的定义;  永久代是HotSpot对方法区的实现。   方法区被替换为元空间# 从JDK 8开始，永久代被移除。  原先存放在永久代中的类的元信息转移到了本地内存,并把这块区域称为元空间。  同时，原先存放在永久代的interned Strings 和 class static variables 转移到了Java堆。    The proposed i">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-12-14T08:25:16.485Z">
+<meta property="og:updated_time" content="2019-12-14T15:29:44.121Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="typora-vue-theme主题介绍">
-<meta name="twitter:description" content="Good!">
+<meta name="twitter:title" content="JVM | JDK1.8中永久代被删除">
+<meta name="twitter:description" content="方法区与永久代的关系# 方法区是JVM规范中的定义;  永久代是HotSpot对方法区的实现。   方法区被替换为元空间# 从JDK 8开始，永久代被移除。  原先存放在永久代中的类的元信息转移到了本地内存,并把这块区域称为元空间。  同时，原先存放在永久代的interned Strings 和 class static variables 转移到了Java堆。    The proposed i">
 
 
 
@@ -98,7 +97,7 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Muse',
+    scheme: 'Pisces',
     version: '5.1.4',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
     fancybox: true,
@@ -120,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="https://ppp21spider.github.io/2018/09/07/article-title/">
+  <link rel="canonical" href="https://ppp21spider.github.io/2015/01/01/Jvm-PerGen/">
 
 
 
 
 
-  <title>typora-vue-theme主题介绍 | Hexo</title>
+  <title>JVM | JDK1.8中永久代被删除 | 流熵</title>
   
 
 
@@ -156,12 +155,12 @@
     <div class="custom-logo-site-title">
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">Hexo</span>
+        <span class="site-title">流熵</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
       
-        <p class="site-subtitle"></p>
+        <p class="site-subtitle">任其妄为无所动,守得云开见月明</p>
       
   </div>
 
@@ -187,6 +186,16 @@
               <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
             
             Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
           </a>
         </li>
       
@@ -233,16 +242,16 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://ppp21spider.github.io/2018/09/07/article-title/">
+    <link itemprop="mainEntityOfPage" href="https://ppp21spider.github.io/2015/01/01/Jvm-PerGen/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="John Doe">
+      <meta itemprop="name" content="陈然">
       <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="https://avatars3.githubusercontent.com/u/5056214?s=400&u=23753b34d1877bb889a8d650285a0de95ee5b0d0&v=4">
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
+      <meta itemprop="name" content="流熵">
     </span>
 
     
@@ -250,7 +259,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">typora-vue-theme主题介绍</h1>
+          <h1 class="post-title" itemprop="name headline">JVM | JDK1.8中永久代被删除</h1>
         
 
         <div class="post-meta">
@@ -262,8 +271,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-07T09:25:00+08:00">
-                2018-09-07
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2015-01-01T21:00:00+08:00">
+                2015-01-01
               </time>
             
 
@@ -285,8 +294,19 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Markdown/" itemprop="url" rel="index">
-                    <span itemprop="name">Markdown</span>
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+                  , 
+                
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/JVM/" itemprop="url" rel="index">
+                    <span itemprop="name">JVM</span>
                   </a>
                 </span>
 
@@ -322,7 +342,40 @@
       
 
       
-        <p>Good!</p>
+        <h1><span id="fang-fa-qu-yu-yong-jiu-dai-de-guan-xi">方法区与永久代的关系</span><a href="#fang-fa-qu-yu-yong-jiu-dai-de-guan-xi" class="header-anchor">#</a></h1><ul>
+<li><p>方法区是JVM规范中的定义;</p>
+</li>
+<li><p>永久代是HotSpot对方法区的实现。</p>
+</li>
+</ul>
+<h1><span id="fang-fa-qu-bei-ti-huan-wei-yuan-kong-jian">方法区被替换为元空间</span><a href="#fang-fa-qu-bei-ti-huan-wei-yuan-kong-jian" class="header-anchor">#</a></h1><ul>
+<li><p>从JDK 8开始，永久代被移除。</p>
+</li>
+<li><p>原先存放在永久代中的类的元信息转移到了本地内存,并把这块区域称为元空间。</p>
+</li>
+<li><p>同时，原先存放在永久代的interned Strings 和 class static variables 转移到了Java堆。</p>
+</li>
+</ul>
+<blockquote>
+<p>The proposed implementation will allocate class meta-data in native memory and move interned Strings and class statics to the Java heap. Hotspot will explicitly allocate and free the native memory for the class meta-data.<br>-QW:<a href="https://openjdk.java.net/jeps/122" target="_blank" rel="noopener">https://openjdk.java.net/jeps/122</a> </p>
+</blockquote>
+<h1><span id="guan-yu-yuan-kong-jian">关于元空间</span><a href="#guan-yu-yuan-kong-jian" class="header-anchor">#</a></h1><ul>
+<li>JVM会在运行时动态调整元空间的大小。G1和CMS都会很好地收集Metaspace区，一般会伴随着Full GC。</li>
+<li>可以使用 -XX:MaxMetaspaceSize 参数来指定 Metaspace 区域的最大空间。</li>
+<li>MaxMetaspaceSize如果设置过小，元数据超过了设置的最大空间，会发生GC；如果设置过大，会浪费系统内存。</li>
+<li>元空间耗尽，会引发“java.lang.OutOfMemoryError: Metadata space”错误。</li>
+<li>因此，对Metaspace进行适当的监控和调优是非常有必要的。</li>
+</ul>
+<h1><span id="yong-jiu-dai-ti-huan-wei-yuan-kong-jian-de-hao-chu">永久代替换为元空间的好处</span><a href="#yong-jiu-dai-ti-huan-wei-yuan-kong-jian-de-hao-chu" class="header-anchor">#</a></h1><ul>
+<li><p>把元信息和interned Strings、class static variables分开管理。不会再发生永久代内存泄漏java.lang.OutOfMemoryError: PermGen。</p>
+</li>
+<li><p>其中interned Strings、class static variables由堆来统一管理。</p>
+</li>
+<li><p>元信息放在本地内存，由元空间管理。</p>
+<hr>
+<p>名词：<br>方法区–Permanent Generation<br>元空间–Metaspace<br>元信息–Class metadata<br>本地内存–Native memory<br>interned Strings–字符串常量<br>参考：<br><a href="https://openjdk.java.net/jeps/122" target="_blank" rel="noopener">https://openjdk.java.net/jeps/122</a><br><a href="https://www.sczyh30.com/posts/Java/jvm-metaspace/" target="_blank" rel="noopener">https://www.sczyh30.com/posts/Java/jvm-metaspace/</a><br><a href="https://blog.csdn.net/u012834750/article/details/70160594" target="_blank" rel="noopener">https://blog.csdn.net/u012834750/article/details/70160594</a></p>
+</li>
+</ul>
 
       
     </div>
@@ -337,14 +390,6 @@
     
 
     <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/Typora/" rel="tag"># Typora</a>
-          
-            <a href="/tags/Markdown/" rel="tag"># Markdown</a>
-          
-        </div>
       
 
       
@@ -361,8 +406,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/09/14/hello-world/" rel="prev" title="Hello World">
-                Hello World <i class="fa fa-chevron-right"></i>
+              <a href="/2018/08/07/Kafka-3/" rel="prev" title="Kafka系列">
+                Kafka系列 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -415,12 +460,23 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
-              <p class="site-author-name" itemprop="name">John Doe</p>
+              <img class="site-author-image" itemprop="image" src="https://avatars3.githubusercontent.com/u/5056214?s=400&u=23753b34d1877bb889a8d650285a0de95ee5b0d0&v=4" alt="陈然">
+            
+              <p class="site-author-name" itemprop="name">陈然</p>
               <p class="site-description motion-element" itemprop="description"></p>
           </div>
 
@@ -431,7 +487,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -442,21 +498,12 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">1</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">categories</span>
                 </a>
               </div>
             
 
-            
-              
-              
-              <div class="site-state-item site-state-tags">
-                <a href="/tags/index.html">
-                  <span class="site-state-item-count">2</span>
-                  <span class="site-state-item-name">tags</span>
-                </a>
-              </div>
             
 
           </nav>
@@ -477,6 +524,22 @@
       </section>
 
       
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#null"><span class="nav-number">1.</span> <span class="nav-text">方法区与永久代的关系#</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#null"><span class="nav-number">2.</span> <span class="nav-text">方法区被替换为元空间#</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#null"><span class="nav-number">3.</span> <span class="nav-text">关于元空间#</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#null"><span class="nav-number">4.</span> <span class="nav-text">永久代替换为元空间的好处#</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
 
       
 
@@ -494,7 +557,7 @@
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">John Doe</span>
+  <span class="author" itemprop="copyrightHolder">陈然</span>
 
   
 </div>
@@ -508,7 +571,7 @@
 
 
 
-  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Muse</a> v5.1.4</div>
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.4</div>
 
 
 
@@ -607,6 +670,13 @@
 
   
   
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
 
   
   <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
