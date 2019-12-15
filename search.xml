@@ -4,27 +4,6 @@
   
     
     <entry>
-      <title>Java 锁系列之一：内容总览</title>
-      <link href="/2018/08/07/Java-lock-1/"/>
-      <url>/2018/08/07/Java-lock-1/</url>
-      
-        <content type="html"><![CDATA[<h1><span id="yi-ji-biao-ti">一级标题</span><a href="#yi-ji-biao-ti" class="header-anchor">#</a></h1>]]></content>
-      
-      
-      <categories>
-          
-          <category> Java </category>
-          
-          <category> Lock </category>
-          
-      </categories>
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>Kafka系列</title>
       <link href="/2018/08/07/Kafka-1/"/>
       <url>/2018/08/07/Kafka-1/</url>
@@ -44,16 +23,18 @@
     
     
     <entry>
-      <title>Kafka系列</title>
-      <link href="/2018/08/07/Kafka-2/"/>
-      <url>/2018/08/07/Kafka-2/</url>
+      <title>Java Lock 1 | 大纲</title>
+      <link href="/2016/08/07/Java-Lock-1/"/>
+      <url>/2016/08/07/Java-Lock-1/</url>
       
-        <content type="html"><![CDATA[]]></content>
+        <content type="html"><![CDATA[<h1><span id="方法区与永久代的关系">方法区与永久代的关系</span></h1><ul><li><p>方法区是JVM规范中的定义;</p></li><li><p>永久代是HotSpot对方法区的实现。</p></li></ul><h1><span id="方法区被替换为元空间">方法区被替换为元空间</span></h1><ul><li><p>从JDK 8开始，永久代被移除。</p></li><li><p>原先存放在永久代中的类的元信息转移到了本地内存,并把这块区域称为元空间。</p></li><li><p>同时，原先存放在永久代的interned Strings 和 class static variables 转移到了Java堆。</p></li></ul><blockquote><p>The proposed implementation will allocate class meta-data in native memory and move interned Strings and class statics to the Java heap. Hotspot will explicitly allocate and free the native memory for the class meta-data.<br>-QW:<a href="https://openjdk.java.net/jeps/122" target="_blank" rel="noopener">https://openjdk.java.net/jeps/122</a> </p></blockquote><h1><span id="关于元空间">关于元空间</span></h1><ul><li>JVM会在运行时动态调整元空间的大小。G1和CMS都会很好地收集Metaspace区，一般会伴随着Full GC。</li><li>可以使用 -XX:MaxMetaspaceSize 参数来指定 Metaspace 区域的最大空间。</li><li>MaxMetaspaceSize如果设置过小，元数据超过了设置的最大空间，会发生GC；如果设置过大，会浪费系统内存。</li><li>元空间耗尽，会引发“java.lang.OutOfMemoryError: Metadata space”错误。</li><li>因此，对Metaspace进行适当的监控和调优是非常有必要的。</li></ul><h1><span id="永久代替换为元空间的好处">永久代替换为元空间的好处</span></h1><ul><li><p>把元信息和interned Strings、class static variables分开管理。不会再发生永久代内存泄漏java.lang.OutOfMemoryError: PermGen。</p></li><li><p>其中interned Strings、class static variables由堆来统一管理。</p></li><li><p>元信息放在本地内存，由元空间管理。</p><hr><p>名词：<br>方法区–Permanent Generation<br>元空间–Metaspace<br>元信息–Class metadata<br>本地内存–Native memory<br>interned Strings–字符串常量<br>参考：<br><a href="https://openjdk.java.net/jeps/122" target="_blank" rel="noopener">https://openjdk.java.net/jeps/122</a><br><a href="https://www.sczyh30.com/posts/Java/jvm-metaspace/" target="_blank" rel="noopener">https://www.sczyh30.com/posts/Java/jvm-metaspace/</a><br><a href="https://blog.csdn.net/u012834750/article/details/70160594" target="_blank" rel="noopener">https://blog.csdn.net/u012834750/article/details/70160594</a></p></li></ul>]]></content>
       
       
       <categories>
           
-          <category> Kafka </category>
+          <category> Java </category>
+          
+          <category> Lock </category>
           
       </categories>
       
@@ -63,16 +44,18 @@
     
     
     <entry>
-      <title>Kafka系列</title>
-      <link href="/2018/08/07/Kafka-3/"/>
-      <url>/2018/08/07/Kafka-3/</url>
+      <title>JVM | JVM参数及配置建议</title>
+      <link href="/2015/01/02/Jvm-Params-1/"/>
+      <url>/2015/01/02/Jvm-Params-1/</url>
       
-        <content type="html"><![CDATA[]]></content>
+        <content type="html"><![CDATA[<blockquote><p>本文是对照Oracle JDK1.8官方文档，重新修正的常用JVM参数列表。原版文章已删除。<br><a href="https://docs.oracle.com/javase/8/docs/technotes/tools/unix/java.html" target="_blank" rel="noopener">https://docs.oracle.com/javase/8/docs/technotes/tools/unix/java.html</a></p></blockquote><h1><span id="jvm参数说明">JVM参数说明</span></h1><table><thead><tr><th>参数名称</th><th align="left">含义</th><th align="center">示例</th><th align="right">注释</th></tr></thead><tbody><tr><td>-Xms</td><td align="left">初始堆大小</td><td align="center">-Xms8G</td><td align="right">应用启动后，JVM堆会增大到-Xms，而后按需向OS请求内存。因该过耗时，建议设置-Xms=-Xmx</td></tr><tr><td>-Xmx</td><td align="left">最大堆大小</td><td align="center">-Xmx8G</td><td align="right">建议设置-Xms=-Xmx</td></tr><tr><td>-Xmn</td><td align="left">年轻代大小</td><td align="center">-Xmn256m</td><td align="right">Java堆 = 老年代 + 新生代。建议年轻代大小设置为整个堆大小的3/8。这里年轻代，指eden + 2 survivor space。-Xmn设置的时候初始值和最大值，（如果想分别设置，可用-XX:NewSize 、 -XX:MaxNewSize，没实践过不建议…）</td></tr><tr><td><del>-XX:PermSize</del></td><td align="left">永久代大小</td><td align="center"></td><td align="right">JDK1.8中删除了永久代</td></tr></tbody></table><hr><p> 名词：<br> 方法区–Permanent Generation<br> 元空间–Metaspace<br> 元信息–Class metadata<br> 本地内存–Native memory<br> interned Strings–字符串常量<br> 参考：<br> <a href="https://docs.oracle.com/cd/E15523_01/web.1111/e13814/jvm_tuning.htm#PERFM164" target="_blank" rel="noopener">https://docs.oracle.com/cd/E15523_01/web.1111/e13814/jvm_tuning.htm#PERFM164</a><br> <a href="https://docs.oracle.com/javase/8/docs/technotes/tools/unix/java.html" target="_blank" rel="noopener">https://docs.oracle.com/javase/8/docs/technotes/tools/unix/java.html</a></p>]]></content>
       
       
       <categories>
           
-          <category> Kafka </category>
+          <category> Java </category>
+          
+          <category> JVM </category>
           
       </categories>
       
@@ -86,7 +69,7 @@
       <link href="/2015/01/01/Jvm-PerGen/"/>
       <url>/2015/01/01/Jvm-PerGen/</url>
       
-        <content type="html"><![CDATA[<h1><span id="fang-fa-qu-yu-yong-jiu-dai-de-guan-xi">方法区与永久代的关系</span><a href="#fang-fa-qu-yu-yong-jiu-dai-de-guan-xi" class="header-anchor">#</a></h1><ul><li><p>方法区是JVM规范中的定义;</p></li><li><p>永久代是HotSpot对方法区的实现。</p></li></ul><h1><span id="fang-fa-qu-bei-ti-huan-wei-yuan-kong-jian">方法区被替换为元空间</span><a href="#fang-fa-qu-bei-ti-huan-wei-yuan-kong-jian" class="header-anchor">#</a></h1><ul><li><p>从JDK 8开始，永久代被移除。</p></li><li><p>原先存放在永久代中的类的元信息转移到了本地内存,并把这块区域称为元空间。</p></li><li><p>同时，原先存放在永久代的interned Strings 和 class static variables 转移到了Java堆。</p></li></ul><blockquote><p>The proposed implementation will allocate class meta-data in native memory and move interned Strings and class statics to the Java heap. Hotspot will explicitly allocate and free the native memory for the class meta-data.<br>-QW:<a href="https://openjdk.java.net/jeps/122" target="_blank" rel="noopener">https://openjdk.java.net/jeps/122</a> </p></blockquote><h1><span id="guan-yu-yuan-kong-jian">关于元空间</span><a href="#guan-yu-yuan-kong-jian" class="header-anchor">#</a></h1><ul><li>JVM会在运行时动态调整元空间的大小。G1和CMS都会很好地收集Metaspace区，一般会伴随着Full GC。</li><li>可以使用 -XX:MaxMetaspaceSize 参数来指定 Metaspace 区域的最大空间。</li><li>MaxMetaspaceSize如果设置过小，元数据超过了设置的最大空间，会发生GC；如果设置过大，会浪费系统内存。</li><li>元空间耗尽，会引发“java.lang.OutOfMemoryError: Metadata space”错误。</li><li>因此，对Metaspace进行适当的监控和调优是非常有必要的。</li></ul><h1><span id="yong-jiu-dai-ti-huan-wei-yuan-kong-jian-de-hao-chu">永久代替换为元空间的好处</span><a href="#yong-jiu-dai-ti-huan-wei-yuan-kong-jian-de-hao-chu" class="header-anchor">#</a></h1><ul><li><p>把元信息和interned Strings、class static variables分开管理。不会再发生永久代内存泄漏java.lang.OutOfMemoryError: PermGen。</p></li><li><p>其中interned Strings、class static variables由堆来统一管理。</p></li><li><p>元信息放在本地内存，由元空间管理。</p><hr><p>名词：<br>方法区–Permanent Generation<br>元空间–Metaspace<br>元信息–Class metadata<br>本地内存–Native memory<br>interned Strings–字符串常量<br>参考：<br><a href="https://openjdk.java.net/jeps/122" target="_blank" rel="noopener">https://openjdk.java.net/jeps/122</a><br><a href="https://www.sczyh30.com/posts/Java/jvm-metaspace/" target="_blank" rel="noopener">https://www.sczyh30.com/posts/Java/jvm-metaspace/</a><br><a href="https://blog.csdn.net/u012834750/article/details/70160594" target="_blank" rel="noopener">https://blog.csdn.net/u012834750/article/details/70160594</a></p></li></ul>]]></content>
+        <content type="html"><![CDATA[<h1><span id="方法区与永久代的关系">方法区与永久代的关系</span></h1><ul><li><p>方法区是JVM规范中的定义;</p></li><li><p>永久代是HotSpot对方法区的实现。</p></li></ul><h1><span id="方法区被替换为元空间">方法区被替换为元空间</span></h1><ul><li><p>从JDK 8开始，永久代被移除。</p></li><li><p>原先存放在永久代中的类的元信息转移到了本地内存,并把这块区域称为元空间。</p></li><li><p>同时，原先存放在永久代的interned Strings 和 class static variables 转移到了Java堆。</p></li></ul><blockquote><p>The proposed implementation will allocate class meta-data in native memory and move interned Strings and class statics to the Java heap. Hotspot will explicitly allocate and free the native memory for the class meta-data.<br>-QW:<a href="https://openjdk.java.net/jeps/122" target="_blank" rel="noopener">https://openjdk.java.net/jeps/122</a> </p></blockquote><h1><span id="关于元空间">关于元空间</span></h1><ul><li>JVM会在运行时动态调整元空间的大小。G1和CMS都会很好地收集Metaspace区，一般会伴随着Full GC。</li><li>可以使用 -XX:MaxMetaspaceSize 参数来指定 Metaspace 区域的最大空间。</li><li>MaxMetaspaceSize如果设置过小，元数据超过了设置的最大空间，会发生GC；如果设置过大，会浪费系统内存。</li><li>元空间耗尽，会引发“java.lang.OutOfMemoryError: Metadata space”错误。</li><li>因此，对Metaspace进行适当的监控和调优是非常有必要的。</li></ul><h1><span id="永久代替换为元空间的好处">永久代替换为元空间的好处</span></h1><ul><li><p>把元信息和interned Strings、class static variables分开管理。不会再发生永久代内存泄漏java.lang.OutOfMemoryError: PermGen。</p></li><li><p>其中interned Strings、class static variables由堆来统一管理。</p></li><li><p>元信息放在本地内存，由元空间管理。</p><hr><p>名词：<br>方法区–Permanent Generation<br>元空间–Metaspace<br>元信息–Class metadata<br>本地内存–Native memory<br>interned Strings–字符串常量<br>参考：<br><a href="https://openjdk.java.net/jeps/122" target="_blank" rel="noopener">https://openjdk.java.net/jeps/122</a><br><a href="https://www.sczyh30.com/posts/Java/jvm-metaspace/" target="_blank" rel="noopener">https://www.sczyh30.com/posts/Java/jvm-metaspace/</a><br><a href="https://blog.csdn.net/u012834750/article/details/70160594" target="_blank" rel="noopener">https://blog.csdn.net/u012834750/article/details/70160594</a></p></li></ul>]]></content>
       
       
       <categories>
@@ -94,6 +77,27 @@
           <category> Java </category>
           
           <category> JVM </category>
+          
+      </categories>
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Java | 文档</title>
+      <link href="/2010/05/23/Java-Misc-1/"/>
+      <url>/2010/05/23/Java-Misc-1/</url>
+      
+        <content type="html"><![CDATA[<h1><span id="oracle-java-doc">Oracle Java Doc</span></h1><blockquote><p><a href="https://docs.oracle.com/javase/8/docs/technotes/guides/" target="_blank" rel="noopener">https://docs.oracle.com/javase/8/docs/technotes/guides/</a></p></blockquote>  <a id="more"></a><h1><span id="jvm-params">JVM Params</span></h1><blockquote><p><a href="https://www.oracle.com/technetwork/articles/java/vmoptions-jsp-140102.html" target="_blank" rel="noopener">https://www.oracle.com/technetwork/articles/java/vmoptions-jsp-140102.html</a></p></blockquote>]]></content>
+      
+      
+      <categories>
+          
+          <category> Java </category>
+          
+          <category> Misc </category>
           
       </categories>
       
